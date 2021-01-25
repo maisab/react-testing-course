@@ -1,0 +1,22 @@
+{
+  "name": "notes",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "enzyme": "^2.9.1",
+    "react-scripts": "1.0.10",
+    "react-test-renderer": "^15.6.1"
+  },
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-bootstrap": "^0.31.2",
+    "react-dom": "^15.6.1",
+    "sfcookies": "^1.0.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "CI=true react-scripts test --env=jsdom --coverage --collectCoverageFrom=src/components/*js --collectCoverageFrom=!src/path/to/file",
+    "eject": "react-scripts eject"
+  }
+}

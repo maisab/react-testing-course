@@ -1,0 +1,26 @@
+{
+  "name": "pardys",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "enzyme": "^2.9.1",
+    "react-scripts": "1.0.11",
+    "react-test-renderer": "^15.6.1",
+    "sinon": "^3.2.0",
+    "redux-mock-store": "^1.5.4"
+  },
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-bootstrap": "^0.31.2",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.1.2",
+    "redux": "^3.7.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "CI=true react-scripts test --env=jsdom --coverage --collectCoverageFrom=src/components/*js --collectCoverageFrom=!src/path/to/file",
+    "eject": "react-scripts eject"
+  }
+}
