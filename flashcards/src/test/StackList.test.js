@@ -4,6 +4,7 @@ import { mapStateToProps, StackList } from "../components/StackList";
 import { stacks } from '../data/fixtures';
 import configureMockStore from "redux-mock-store";
 import { Provider } from "react-redux";
+import { getText, getLength} from "./utils/UIHelper.js";
 
 const props = { stacks };
 
@@ -11,7 +12,7 @@ describe("StackList", () => {
   const stackList = shallow(<StackList {...props} />);
 
   it("renders the correct number of links", () => {
-    expect(stackList.find("Link").length).toEqual(1);
+    expect(getLength(stackList, "Link")).toEqual(1);
   });
 
   it("renders the correct number of links", () => {
@@ -19,7 +20,7 @@ describe("StackList", () => {
   });
 
   it("renders the link title", () => {
-    expect(stackList.find('h4').text()).toEqual('test title');
+    expect(getText(stackList, 'h4')).toEqual('test title');
   });
 
   describe("mapStateToProps", () => {

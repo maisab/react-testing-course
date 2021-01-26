@@ -1,6 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { StackForm } from "../components/StackForm";
+import { getTextAt, clickAt, findAt} from "./utils/UIHelper.js";
 
 const changeTitle = "change title";
 const changePrompt = "change prompt";
@@ -10,16 +11,16 @@ describe("StackForm", () => {
   const stackForm = shallow(<StackForm />);
 
   it("renders the form title", () => {
-    expect(stackForm.find("h4").at(1).text()).toEqual("Create a New Stack");
+    expect(getTextAt(stackForm, "h4", 1)).toEqual("Create a New Stack");
   });
 
   it("renders a link home", () => {
-    expect(stackForm.find("h4").at(0).text()).toEqual("Home");
+    expect(getTextAt(stackForm, "h4", 0)).toEqual("Home");
   });
 
   it("click link go home", () => {
-    expect(stackForm.find("h4").at(0).text()).toEqual("Home");
-    stackForm.find("h4").at(0).simulate("click");
+    expect(getTextAt(stackForm, "h4", 0)).toEqual("Home");
+    clickAt(stackForm, "h4", 0)
     expect(window.location.pathname).toEqual("/");
   });
 
@@ -28,11 +29,11 @@ describe("StackForm", () => {
   });
 
   it("renders a button to add a new card", () => {
-    expect(stackForm.find("Button").at(0).props().children).toEqual("Add Card");
+    expect(findAt(stackForm, "Button", 0).props().children).toEqual("Add Card");
   });
 
   it("renders link to submit the form", () => {
-    expect(stackForm.find("Button").at(1).props().children).toEqual(
+    expect(findAt(stackForm, "Button", 1).props().children).toEqual(
       "Save and Add the Stack"
     );
   });
@@ -51,7 +52,7 @@ describe("StackForm", () => {
 
   describe("when adding a new card", () => {
     beforeEach(() => {
-      stackForm.find("Button").at(0).simulate("click");
+      clickAt(stackForm, "Button", 0)
     });
 
     afterEach(() => {
@@ -63,13 +64,13 @@ describe("StackForm", () => {
     });
 
     it("renders the prompt section", () => {
-      expect(stackForm.find("ControlLabel").at(1).props().children).toEqual(
+      expect(findAt(stackForm, "ControlLabel", 1).props().children).toEqual(
         "Prompt:"
       );
     });
 
     it("renders the answer section", () => {
-      expect(stackForm.find("ControlLabel").at(2).props().children).toEqual(
+      expect(findAt(stackForm, "ControlLabel", 2).props().children).toEqual(
         "Answer:"
       );
     });
@@ -103,7 +104,7 @@ describe("StackForm", () => {
 
   describe("when adding and saving stack", () => {
     beforeEach(() => {
-      stackForm.find("Button").at(0).simulate("click");
+      clickAt(stackForm, "Button", 0)
     });
 
     it("adds a new card to the state", () => {
@@ -111,7 +112,7 @@ describe("StackForm", () => {
     });
 
     it("save the stack and go home", () => {
-      stackForm.find("Button").at(1).simulate("click");
+      clickAt(stackForm, "Button", 1)
       expect(window.location.pathname).toEqual("/");
     });
   });

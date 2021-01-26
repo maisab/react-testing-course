@@ -1,12 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import App from '../components/App';
+import { getText} from "./utils/UIHelper.js";
 
 describe('App', () => {
   const app = shallow(<App />);
 
   it('renders the `Flashcard` title', () => {
-    expect(app.find('h2').text()).toEqual('Flashcard')
+    expect(getText(app, 'h2')).toEqual('Flashcard')
   });
 
   it('renders the StackList', () => {
@@ -14,6 +15,6 @@ describe('App', () => {
   });
 
   it('renders a link to create new stacks', () => {
-    expect(app.find('Link h4').text()).toEqual('Create a New Stack');
+    expect(getText(app, 'Link h4')).toEqual('Create a New Stack');
   });
 });

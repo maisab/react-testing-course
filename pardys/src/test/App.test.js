@@ -4,6 +4,7 @@ import { App } from "../components/App";
 import { categories } from "../data/fixtures";
 import configureMockStore from "redux-mock-store";
 import { Provider } from "react-redux";
+import { getText, getTextAt, getLength} from "./utils/UIHelper.js";
 
 const props = { categories };
 
@@ -11,17 +12,17 @@ describe("App", () => {
   const app = shallow(<App {...props} />);
 
   it("renders the title", () => {
-    expect(app.find("h2").text()).toEqual("Pardys!");
+    expect(getText(app, "h2")).toEqual("Pardys!");
   });
 
   it("creates the correct number of links", () => {
-    expect(app.find("Link").length).toEqual(3);
+    expect(getLength(app, "Link")).toEqual(3);
   });
 
   it("title the links correctly", () => {
-    expect(app.find("Link h4").at(0).text()).toEqual("category one");
-    expect(app.find("Link h4").at(1).text()).toEqual("category two");
-    expect(app.find("Link h4").at(2).text()).toEqual("category three");
+    expect(getTextAt(app, "Link h4", 0)).toEqual("category one");
+    expect(getTextAt(app, "Link h4", 1)).toEqual("category two");
+    expect(getTextAt(app, "Link h4", 2)).toEqual("category three");
   });
 
   describe("mapStateToProps", () => {

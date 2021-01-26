@@ -4,6 +4,7 @@ import { Stack } from "../components/Stack";
 import { stack } from "../data/fixtures";
 import configureMockStore from "redux-mock-store";
 import { Provider } from "react-redux";
+import { getText, getLength} from "./utils/UIHelper.js";
 
 const props = { stack };
 
@@ -11,15 +12,15 @@ describe("Stack", () => {
   const stack = shallow(<Stack {...props} />);
 
   it("renders the title", () => {
-    expect(stack.find("h3").text()).toEqual(props.stack.title);
+    expect(getText(stack, "h3")).toEqual(props.stack.title);
   });
 
   it("renders the Link home", () => {
-    expect(stack.find("a h4").text()).toEqual("Home");
+    expect(getText(stack, "a h4")).toEqual("Home");
   });
 
   it("renders the correct number of cards", () => {
-    expect(stack.find("Card").length).toEqual(2);
+    expect(getLength(stack, "Card")).toEqual(2);
   });
 
   it("mapStateToProps should return the right stack value", () => {

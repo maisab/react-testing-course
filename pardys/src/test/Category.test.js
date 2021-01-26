@@ -5,6 +5,7 @@ import { categories, clues } from "../data/fixtures";
 import { fakeServer } from "sinon";
 import configureMockStore from "redux-mock-store";
 import { Provider } from "react-redux";
+import { getText, getLength, getMockServer } from "./utils/UIHelper.js";
 
 const props = { category: categories[0] };
 
@@ -12,12 +13,7 @@ describe("Category", () => {
   let server;
 
   beforeEach(() => {
-    server = fakeServer.create();
-    server.respondWith(
-      "GET",
-      `http://jservice.io/api/clues?category=${props.category.id}`,
-      [200, { "Content-Type": "application/json" }, JSON.stringify(clues)]
-    );
+    server = getMockServer(fakeServer, props, clues);
   });
 
   describe("when creating a new category", () => {
@@ -36,11 +32,11 @@ describe("Category", () => {
     });
 
     it("renders the category title", () => {
-      expect(category.find("h2").text()).toEqual("category one");
+      expect(getText(category, "h2")).toEqual("category one");
     });
 
     it("renders the correct number of clues", () => {
-      expect(category.find("Clue").length).toEqual(2);
+      expect(getLength(category, "Clue")).toEqual(2);
     });
   });
 });
@@ -49,7 +45,7 @@ describe("LinkedCategory", () => {
   const linkedCategory = shallow(<LinkedCategory />);
 
   it("creates the link to navigate home", () => {
-    expect(linkedCategory.find("Link h4").text()).toEqual("Home");
+    expect(getText(linkedCategory, "Link h4")).toEqual("Home");
   });
 
   it("creates a category component", () => {

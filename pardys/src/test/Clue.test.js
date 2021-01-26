@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Clue from '../components/Clue';
 import { clue } from '../data/fixtures';
+import { getBtnText, clickBtn, getText, getTextAt, getLength} from "./utils/UIHelper.js";
 
 const props = { clue };
 
@@ -9,15 +10,15 @@ describe('Clue', () => {
   let clueWrapper = shallow(<Clue {...props} />);
 
   it('renders the clue value', () => {
-    expect(clueWrapper.find('h4').text()).toEqual("200");
+    expect(getText(clueWrapper, 'h4')).toEqual("200");
   });
 
   it('renders the clue question', () => {
-    expect(clueWrapper.find('h5').at(0).text()).toEqual("q one");
+    expect(getTextAt(clueWrapper, 'h5', 0)).toEqual("q one");
   });
 
   it('renders the clue answer', () => {
-    expect(clueWrapper.find('h5').at(1).text()).toEqual("a one");
+    expect(getTextAt(clueWrapper, 'h5', 1)).toEqual("a one");
   });
 
   it('sets the answer with the `text-hidden` class', () => {
@@ -38,7 +39,7 @@ describe('Clue', () => {
     });
 
     it('displays the value as `unknown`', () => {
-      expect(clueWrapper.find('h4').text()).toEqual('unknown');
+      expect(getText(clueWrapper, 'h4')).toEqual('unknown');
     });
   });
 

@@ -1,11 +1,5 @@
-export async function getInnerText(page, toSelect) {
-  return page.evaluate(function (item) {
-    const selectedItem = document.querySelector(item);
-    return selectedItem ? selectedItem.innerText : undefined;
-  }, toSelect);
-}
+export const getBtnText = (page = null, pos) => page.find(".btn").at(pos).text();
+export const clickBtn = (page = null, pos) => page.find(".btn").at(pos).simulate("click");
 
-export async function getText(page, pos) {
-    console.log(page)
-  return page.find(".btn").at(pos).text();
-}
+export const getText = (page, type) => page.find(type).text();
+

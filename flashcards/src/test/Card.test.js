@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Card from '../components/Card';
+import { getText} from "./utils/UIHelper.js";
 
 const props = { 
   card: { prompt: 'test prompt', answer: 'test answer'} 
@@ -14,11 +15,11 @@ describe('Card', () => {
   });
 
   it('renders the card prompt', () => {
-    expect(card.find('.card-prompt h4').text()).toEqual(props.card.prompt);
+    expect(getText(card, '.card-prompt h4')).toEqual(props.card.prompt);
   });
 
   it('renders the card answer', () => {
-    expect(card.find('.card-answer h4').text()).toEqual(props.card.answer);
+    expect(getText(card, '.card-answer h4')).toEqual(props.card.answer);
   });
 
   it('applies the `text-hidden` class to the card answer', () => {

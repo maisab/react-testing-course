@@ -1,16 +1,17 @@
 import React from "react";
 import { mount } from "enzyme";
 import App from "../components/App.js";
+import { getBtnText, clickBtn, getText} from "./utils/UIHelper.js";
 
 describe("App", () => {
   let app = mount(<App />);
 
   it("renders the App title", () => {
-    expect(app.find("h2").text()).toEqual("Note to Self");
+    expect(getText(app, "h2")).toEqual("Note to Self");
   });
 
   it("renders the clear button", () => {
-    expect(app.find(".btn").at(1).text()).toEqual("Clear Notes");
+    expect(getBtnText(app, 1)).toEqual("Clear Notes");
   });
 
   describe("when rendering the form", () => {
@@ -19,11 +20,11 @@ describe("App", () => {
     });
 
     it("renders a FormControl component", () => {
-      expect(app.find("FormControl").find('input').exists()).toBe(true);
+      expect(app.find("FormControl").find("input").exists()).toBe(true);
     });
 
     it("renders a submit button", () => {
-      expect(app.find(".btn").at(0).text()).toEqual("Submit");
+      expect(getBtnText(app, 0)).toEqual("Submit");
     });
   });
 
@@ -42,11 +43,11 @@ describe("App", () => {
 
     describe("and submitting the new note", () => {
       beforeEach(() => {
-        app.find(".btn").at(0).simulate("click");
+        clickBtn(app, 0);
       });
 
       afterEach(() => {
-        app.find(".btn").at(1).simulate("click");
+        clickBtn(app, 1);
       });
 
       it("adds the new note to the state", () => {
@@ -75,7 +76,7 @@ describe("App", () => {
 
           expect(app.state().text).toEqual("test note");
 
-          app.find(".btn").at(1).simulate("click");
+          clickBtn(app, 1);
         });
 
         it("clears the notes in state", () => {
